@@ -28,4 +28,6 @@ inversor_on_grid_68211_9 = Inversor_Solar_Fotovoltaico(0,2719,"MIC 3000 TL-X 3KW
 
 inversor_on_grid_68202_0 = Inversor_Solar_Fotovoltaico(0,3509,"MIC 3000 TL-X 3KW MONOFASICO 220V 2MPPT MONITORAMENTO","GROWATT")
 
-print(micro_inversor_151506_4.descricao)
+micro_inversor_151506_4.qnt = input("Existem quantos deste item?")
+
+print("Estoque atualizado para Micro Inversor 151506-4: {}".format(micro_inversor_151506_4.qnt))
