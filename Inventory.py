@@ -74,6 +74,19 @@ def adicionar_estoque():
     print("Produto adicionado ao estoque!")
     wb.save('Estoque.xlsx')
     
-wb.save('Estoque.xlsx')
+#Adicionar qnt de um produto já existente
+def Adicionar_qnt():
+    produto = input("Qual produto gostaria de adicionar qnt?")
+    produto = str(produto)
+    wb = load_workbook('Estoque.xlsx')
+    ws = wb["SmartHaus"]
+    for row in range(2,end_row+1):
+        if ws["A"+str(row)].value == produto:
+            quantidade = input("Quantos produtos estão entrando no estoque?")
+            if quantidade.isdigit():
+                quantidade = int(quantidade)
+                ws["B"+str(row)] = int(ws["B"+str(row)].value) + quantidade
+                wb.save('Estoque.xlsx')
+                print("Produtos adicionado ao estoque!")
 
-adicionar_estoque()
+Adicionar_qnt()
