@@ -75,18 +75,55 @@ def adicionar_estoque():
     wb.save('Estoque.xlsx')
     
 #Adicionar qnt de um produto já existente
-def Adicionar_qnt():
-    produto = input("Qual produto gostaria de adicionar qnt?")
+def adicionar_qnt():
+    produto = input("Qual produto gostaria de dar entrada?")
     produto = str(produto)
     wb = load_workbook('Estoque.xlsx')
     ws = wb["SmartHaus"]
     for row in range(2,end_row+1):
         if ws["A"+str(row)].value == produto:
-            quantidade = input("Quantos produtos estão entrando no estoque?")
-            if quantidade.isdigit():
-                quantidade = int(quantidade)
-                ws["B"+str(row)] = int(ws["B"+str(row)].value) + quantidade
-                wb.save('Estoque.xlsx')
-                print("Produtos adicionado ao estoque!")
+            while True:
+                quantidade = input("Quantidade:")
+                if quantidade.isdigit():
+                    quantidade = int(quantidade)
+                    if quantidade >= 0:
+                        ws["B"+str(row)] = int(ws["B"+str(row)].value) + quantidade
+                        wb.save('Estoque.xlsx')
+                        return print("Produtos adicionados ao estoque!")
+                    else:
+                        print("A quantidade não pode ser zero ou valor negativo.")
+                    ws["B"+str(row)] = int(ws["B"+str(row)].value) + quantidade
+                    wb.save('Estoque.xlsx')
+                    return print("Produtos adicionados ao estoque!")
+                else:
+                    print("Quantidade a ser inserida deve ser um número.")
+        
+    print("Produto não encontrado no estoque.")
 
-Adicionar_qnt()
+#Subtrai qnt de um produto já existente
+def retirar_prod():
+    produto = input("Qual produto gostaria de retirar?")
+    produto = str(produto)
+    wb = load_workbook('Estoque.xlsx')
+    ws = wb["SmartHaus"]
+    for row in range(2,end_row+1):
+        if ws["A"+str(row)].value == produto:
+            while True:
+                quantidade = input("Quantidade:")
+                if quantidade.isdigit():
+                    quantidade = int(quantidade)
+                    if quantidade >= 0:
+                        if quantidade <= ws["B" + str(row)].value:
+                            ws["B"+str(row)] = int(ws["B"+str(row)].value) - quantidade
+                            wb.save('Estoque.xlsx')
+                            return print("Produtos retirados do estoque!")
+                        else:
+                            return print("Não é possível retirar. Atualmente existem {} unidades no estoque.".format(str(ws["B"+str(row)].value)))
+                    else:
+                         print("O valor não pode ser zero ou negativo.")
+                else:
+                    print("Quantidade a ser inserida deve ser um número.")
+        
+    print("Produto não encontrado no estoque.")
+
+retirar_prod()
