@@ -5,4 +5,4 @@ Project of a software to manage a business stock
 25/11/2022 - Interate the stock's plan to use excel as database.
 --DONE--
 --NEXT STEP--
-Connect customer's plan to inventory plan through Python
+Connect customers plan to inventory plan through Python
