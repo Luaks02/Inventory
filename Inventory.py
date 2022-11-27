@@ -134,7 +134,10 @@ def reserved_list(cliente):
     end_col = len(ws["1"])
     for column in range(5,end_col+1):
         if ws[get_column_letter(column)+"1"].value == cliente:
-            return print("This worked!")
+            for produto in range(2,end_row+1):
+                if ws[str(get_column_letter(column)+str(produto))].value is not None:
+                    print("Existem {} de {} reservado para o {}".format(ws["B"+str(produto)].value,ws["A"+str(produto)].value,cliente))
+            return print("Estes são os itens reservados") 
     print("Falha")
 
 reserved_list("teste")
