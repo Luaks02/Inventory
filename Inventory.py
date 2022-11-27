@@ -1,5 +1,6 @@
 from openpyxl import workbook, load_workbook
 from openpyxl.utils import get_column_letter
+import xlwings
 
 #Abrindo a planilha e iniciando variavel de quantidade de linhas já usadas no Estoque
 wb = load_workbook('Estoque.xlsx')
@@ -120,10 +121,20 @@ def retirar_prod():
                         else:
                             return print("Não é possível retirar. Atualmente existem {} unidades no estoque.".format(str(ws["B"+str(row)].value)))
                     else:
-                         print("O valor não pode ser zero ou negativo.")
+                         print("A quantidade não pode ser zero ou negativo.")
                 else:
                     print("Quantidade a ser inserida deve ser um número.")
         
     print("Produto não encontrado no estoque.")
 
-retirar_prod()
+#Buscar lista de produtos reservados
+def reserved_list(cliente):
+    wb = load_workbook('Estoque.xlsx')
+    ws = wb["SmartHaus"]
+    end_col = len(ws["1"])
+    for column in range(5,end_col+1):
+        if ws[get_column_letter(column)+"1"].value == cliente:
+            return print("This worked!")
+    print("Falha")
+
+reserved_list("teste")
